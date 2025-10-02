@@ -1,0 +1,17 @@
+@startuml
+
+actor Usuario
+participant "UI" as UI
+participant Cliente
+participant Cuenta
+
+Usuario -> UI: Ingresa datos de depósito
+UI -> Cliente: realizarDeposito(numeroCuenta, monto)
+Cliente -> Cuenta: realizarDeposito(monto)
+Cuenta -> Cuenta: actualizar saldo
+Cuenta -> Cuenta: agregar movimiento
+Cuenta --> Cliente: nuevo saldo
+Cliente --> UI: nuevo saldo
+UI --> Usuario: mostrar resultado
+
+@enduml

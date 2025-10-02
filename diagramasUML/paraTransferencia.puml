@@ -1,0 +1,24 @@
+@startuml
+
+start
+:Verificar cuenta origen;
+if (Cuenta origen existe?) then (si)
+  if (Cuenta destino existe?) then (si)
+    :Verificar fondos en origen;
+    if (Fondos suficientes?) then (si)
+      :Retirar de origen;
+      :Depositar en destino;
+      :Registrar movimientos;
+      :Transferencia exitosa;
+    else (no)
+      :Fondos insuficientes;
+    endif
+  else (no)
+    :Cuenta destino no existe;
+  endif
+else (no)
+  :Cuenta origen no existe;
+endif
+stop
+
+@enduml

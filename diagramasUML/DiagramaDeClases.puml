@@ -1,0 +1,65 @@
+@startuml
+
+class Cuenta {
+  - numeroCuenta: String
+  - saldo: Number
+  - movimientos: Array
+  + consultarSaldo(): Number
+  + realizarDeposito(monto: Number): Number
+  + realizarRetiro(monto: Number): Number
+  + consultarMovimientos(): Array
+}
+
+class CuentaAhorros {
+  - tipo: String = "ahorros"
+  + realizarRetiro(monto: Number): Number
+}
+
+class CuentaCorriente {
+  - tipo: String = "corriente"
+  - sobregiro: Number
+  + realizarRetiro(monto: Number): Number
+}
+
+class Cliente {
+  - nombre: String
+  - apellido: String
+  - direccion: String
+  - numeroIdentificacion: String
+  - usuario: String
+  - contrasena: String
+  - cuentas: Array
+  + agregarCuenta(cuenta: Cuenta): void
+  + consultarSaldo(numeroCuenta: String): Number
+  + realizarDeposito(numeroCuenta: String, monto: Number): Number
+  + realizarRetiro(numeroCuenta: String, monto: Number): Number
+  + consultarMovimientos(numeroCuenta: String): Array
+  + realizarTransferencia(origenNumeroCuenta: String, destinoCuenta: Cuenta, monto: Number): void
+}
+
+class BancoElBro {
+  - clientes: Array
+  - cuentas: Array
+  + cargarDatosIniciales(): void
+  + autenticar(usuario: String, contrasena: String): Cliente
+  + registrarCliente(cliente: Cliente, tipoCuenta: String): Cliente
+  + generarNumeroCuenta(): String
+  + buscarCuenta(numeroCuenta: String): Cuenta
+  + abrirNuevaCuenta(cliente: Cliente, tipoCuenta: String): Cuenta
+}
+
+class AlertManager {
+  {static} + success(message: String, title: String): void
+  {static} + error(message: String, title: String): void
+  {static} + warning(message: String, title: String): void
+  {static} + confirm(message: String, title: String): Promise
+  {static} + info(message: String, title: String): void
+}
+
+Cuenta <|-- CuentaAhorros
+Cuenta <|-- CuentaCorriente
+Cliente "1" *-- "*" Cuenta
+BancoElBro "1" *-- "*" Cliente
+BancoElBro "1" *-- "*" Cuenta
+
+@enduml

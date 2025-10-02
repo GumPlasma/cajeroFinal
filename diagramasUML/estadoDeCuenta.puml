@@ -1,0 +1,9 @@
+@startuml
+
+[*] --> Activa
+
+Activa --> Activa : depositar
+Activa --> Activa : retirar (con fondos)
+Activa --> [*] : cerrar cuenta
+
+@enduml

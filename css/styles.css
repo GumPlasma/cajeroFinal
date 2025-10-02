@@ -1,0 +1,365 @@
+:root {
+    /* PALETA DE COLORES */
+    --gray-100: #f8f9fa;
+    --gray-200: #e9ecef;
+    --gray-300: #dee2e6;
+    --gray-400: #ced4da;
+    --gray-500: #adb5bd;
+    --gray-600: #6c757d;
+    --gray-700: #495057;
+    --gray-800: #343a40;
+    --gray-900: #212529;
+    --yellow-primary: #ffc107;
+    --yellow-dark: #e0a800;
+    --yellow-light: #ffcd39;
+    --success: #28a745;
+    --danger: #dc3545;
+    --warning: #ffc107;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--gray-200), var(--gray-300));
+    color: var(--gray-900);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* HEADER CON EFECTO DE PROFUNDIDA*/
+header {
+    background: linear-gradient(135deg, var(--gray-800), var(--gray-900));
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--yellow-primary);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: var(--yellow-primary);
+    padding: 5px;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-text h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    line-height: 1;
+}
+
+.brand-text .slogan {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    font-style: italic;
+    color: var(--yellow-light);
+}
+
+.header-info {
+    text-align: right;
+}
+
+.header-info p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.app-container {
+    background-color: white;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+/* PANTALLAS DEL SISTEMA */
+.screen {
+    padding: 30px;
+    display: none;
+}
+
+.active {
+    display: block;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    color: var(--gray-800);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    font-size: 1.8rem;
+}
+
+h3 {
+    color: var(--gray-700);
+    margin: 1.5rem 0 1rem;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+/* FORMULARIOS */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--gray-300);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+    background-color: var(--gray-100);
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--yellow-primary);
+    box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+    background-color: white;
+}
+
+.password-match {
+    border-color: var(--success);
+}
+
+.password-mismatch {
+    border-color: var(--danger);
+}
+
+/* BOTONES */
+button {
+    background: var(--yellow-primary);
+    color: var(--gray-900);
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: var(--yellow-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: var(--gray-600);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: var(--gray-700);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-success {
+    background: var(--success);
+    color: white;
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+/* OPCIONES DE TRANSACCIÓN */
+.transaction-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.transaction-options button {
+    padding: 18px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+/* TARJETAS DE CUENTA */
+.account-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.account-card {
+    border: 1px solid var(--gray-300);
+    border-radius: 10px;
+    padding: 20px;
+    background: var(--gray-100);
+    transition: all 0.3s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.account-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: var(--yellow-primary);
+}
+
+.account-card h3 {
+    color: var(--gray-800);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+/* LISTA DE MOVIMIENTOS */
+.movimientos-list {
+    list-style: none;
+    margin-top: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.movimiento-item {
+    padding: 15px;
+    border-bottom: 1px solid var(--gray-300);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    transition: background 0.2s;
+}
+
+.movimiento-item:hover {
+    background: var(--gray-100);
+}
+
+.movimiento-item:last-child {
+    border-bottom: none;
+}
+
+.deposito {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.retiro {
+    color: var(--danger);
+    font-weight: 600;
+}
+
+.transferencia {
+    color: var(--warning);
+    font-weight: 600;
+}
+
+/* CONTENEDORES DE OPERACIONES */
+.operation-container {
+    background: var(--gray-100);
+    padding: 25px;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 1px solid var(--gray-300);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .transaction-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+    
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .logo-container {
+        justify-content: center;
+    }
+    
+    .header-info {
+        text-align: center;
+    }
+    
+    .brand-text h1 {
+        font-size: 1.8rem;
+    }
+}

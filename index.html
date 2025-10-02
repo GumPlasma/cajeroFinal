@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco el Bro - Cajero Automático</title>
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="./img/logoBanco.png" alt="Logo Banco el Bro" class="logo-image">
+                <div class="brand-text">
+                    <h1>Banco el Bro</h1>
+                    <p class="slogan">Confianza que crece contigo.</p>
+                </div>
+            </div>
+            <div class="header-info">
+                <p>Cajero Automático</p>
+            </div>
+        </header>
+        
+        <div class="app-container">
+            <!-- PANTALLA DE INICIO DE SESIÓN -->
+            <div id="login-screen" class="screen active">
+                <h2>Iniciar Sesión</h2>
+                <div class="form-group">
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" placeholder="Ingrese su usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" placeholder="Ingrese su contraseña" required>
+                </div>
+                <button id="login-btn">Iniciar Sesión</button>
+                <button id="show-register-btn" class="btn-secondary">Registrar Usuario</button>
+            </div>
+            
+            <!-- PANTALLA DE REGISTRO -->
+            <div id="register-screen" class="screen">
+                <h2>Registrar Usuario</h2>
+                <div class="form-group">
+                    <label for="reg-nombre">Nombre:</label>
+                    <input type="text" id="reg-nombre" placeholder="Ingrese su nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-apellido">Apellido:</label>
+                    <input type="text" id="reg-apellido" placeholder="Ingrese su apellido" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-direccion">Dirección:</label>
+                    <input type="text" id="reg-direccion" placeholder="Ingrese su dirección" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-identificacion">Número de Identificación:</label>
+                    <input type="text" id="reg-identificacion" placeholder="Ingrese su número de identificación" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-usuario">Usuario:</label>
+                    <input type="text" id="reg-usuario" placeholder="Cree un nombre de usuario" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-contrasena">Contraseña:</label>
+                    <input type="password" id="reg-contrasena" placeholder="Cree una contraseña segura" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-contrasena-confirm">Confirmar Contraseña:</label>
+                    <input type="password" id="reg-contrasena-confirm" placeholder="Confirme su contraseña" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-tipo-cuenta">Tipo de Cuenta:</label>
+                    <select id="reg-tipo-cuenta" required>
+                        <option value="">Seleccione el tipo de cuenta</option>
+                        <option value="ahorros">Cuenta de Ahorros</option>
+                        <option value="corriente">Cuenta Corriente</option>
+                    </select>
+                </div>
+                <button id="register-btn">Registrar</button>
+                <button id="back-to-login-btn" class="btn-secondary">Volver a Iniciar Sesión</button>
+            </div>
+            
+            <!-- PANTALLA DE TRANSACCIONES -->
+            <div id="transaction-screen" class="screen">
+                <h2>Bienvenido, <span id="user-name"></span></h2>
+                
+                <h3>Mis Cuentas</h3>
+                <div id="accounts-container" class="account-cards"></div>
+                
+                <h3>Operaciones</h3>
+                <div class="transaction-options">
+                    <button id="consultar-saldo-btn">Consultar Saldo</button>
+                    <button id="depositar-btn">Depositar</button>
+                    <button id="retirar-btn">Retirar</button>
+                    <button id="transferir-btn">Transferir</button>
+                    <button id="consultar-movimientos-btn">Consultar Movimientos</button>
+                    <button id="abrir-cuenta-btn">Abrir Nueva Cuenta</button>
+                    <button id="editar-perfil-btn">Editar Perfil</button>
+                    <button id="logout-btn" class="btn-danger">Cerrar Sesión</button>
+                </div>
+                
+                <!-- SUB-PANTALLAS PARA OPERACIONES -->
+                <div id="consultar-saldo-container" class="operation-container" style="display: none;">
+                    <h3>Consultar Saldo</h3>
+                    <div class="form-group">
+                        <label for="saldo-cuenta">Seleccione la cuenta:</label>
+                        <select id="saldo-cuenta"></select>
+                    </div>
+                    <div id="saldo-result"></div>
+                    <button id="saldo-back-btn" class="btn-secondary">Volver</button>
+                </div>
+                
+                <div id="depositar-container" class="operation-container" style="display: none;">
+                    <h3>Realizar Depósito</h3>
+                    <div class="form-group">
+                        <label for="deposito-cuenta">Seleccione la cuenta:</label>
+                        <select id="deposito-cuenta"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="deposito-monto">Monto a depositar:</label>
+                        <input type="number" id="deposito-monto" min="1" placeholder="Ingrese el monto" required>
+                    </div>
+                    <button id="depositar-execute-btn" class="btn-success">Depositar</button>
+                    <button id="deposito-back-btn" class="btn-secondary">Volver</button>
+                </div>
+                
+                <div id="retirar-container" class="operation-container" style="display: none;">
+                    <h3>Realizar Retiro</h3>
+                    <div class="form-group">
+                        <label for="retiro-cuenta">Seleccione la cuenta:</label>
+                        <select id="retiro-cuenta"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="retiro-monto">Monto a retirar:</label>
+                        <input type="number" id="retiro-monto" min="1" placeholder="Ingrese el monto" required>
+                    </div>
+                    <button id="retirar-execute-btn" class="btn-success">Retirar</button>
+                    <button id="retiro-back-btn" class="btn-secondary">Volver</button>
+                </div>
+                
+                <div id="transferir-container" class="operation-container" style="display: none;">
+                    <h3>Realizar Transferencia</h3>
+                    <div class="form-group">
+                        <label for="transferencia-origen">Cuenta de origen:</label>
+                        <select id="transferencia-origen"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="transferencia-destino">Cuenta de destino:</label>
+                        <input type="text" id="transferencia-destino" placeholder="Número de cuenta" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transferencia-monto">Monto a transferir:</label>
+                        <input type="number" id="transferencia-monto" min="1" placeholder="Ingrese el monto" required>
+                    </div>
+                    <button id="transferir-execute-btn" class="btn-success">Transferir</button>
+                    <button id="transferencia-back-btn" class="btn-secondary">Volver</button>
+                </div>
+                
+                <div id="movimientos-container" class="operation-container" style="display: none;">
+                    <h3>Consultar Movimientos</h3>
+                    <div class="form-group">
+                        <label for="movimientos-cuenta">Seleccione la cuenta:</label>
+                        <select id="movimientos-cuenta"></select>
+                    </div>
+                    <div id="movimientos-result"></div>
+                    <button id="movimientos-back-btn" class="btn-secondary">Volver</button>
+                </div>
+                
+                <!-- SUB-PANTALLA PARA EDITAR PERFIL -->
+                <div id="editar-perfil-container" class="operation-container" style="display: none;">
+                    <h3>Editar Información Personal</h3>
+                    <div class="form-group">
+                        <label for="editar-nombre">Nombre:</label>
+                        <input type="text" id="editar-nombre" placeholder="Ingrese su nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-apellido">Apellido:</label>
+                        <input type="text" id="editar-apellido" placeholder="Ingrese su apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-direccion">Dirección:</label>
+                        <input type="text" id="editar-direccion" placeholder="Ingrese su dirección" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-usuario">Usuario:</label>
+                        <input type="text" id="editar-usuario" placeholder="Ingrese su usuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-contrasena">Contraseña Actual:</label>
+                        <input type="password" id="editar-contrasena" placeholder="Ingrese su contraseña actual" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-nueva-contrasena">Nueva Contraseña:</label>
+                        <input type="password" id="editar-nueva-contrasena" placeholder="Ingrese nueva contraseña">
+                    </div>
+                    <div class="form-group">
+                        <label for="editar-confirmar-contrasena">Confirmar Nueva Contraseña:</label>
+                        <input type="password" id="editar-confirmar-contrasena" placeholder="Confirme nueva contraseña">
+                    </div>
+                    <button id="editar-perfil-execute-btn" class="btn-success">Actualizar Información</button>
+                    <button id="editar-perfil-back-btn" class="btn-secondary">Volver</button>
+                </div>
+                
+                <!-- SUB-PANTALLA PARA ABRIR NUEVA CUENTA -->
+                <div id="abrir-cuenta-container" class="operation-container" style="display: none;">
+                    <h3>Abrir Nueva Cuenta</h3>
+                    <div class="form-group">
+                        <label for="nueva-cuenta-tipo">Tipo de Cuenta:</label>
+                        <select id="nueva-cuenta-tipo" required>
+                            <option value="">Seleccione el tipo de cuenta</option>
+                            <option value="ahorros">Cuenta de Ahorros</option>
+                            <option value="corriente">Cuenta Corriente</option>
+                        </select>
+                    </div>
+                    <button id="abrir-cuenta-execute-btn" class="btn-success">Abrir Cuenta</button>
+                    <button id="abrir-cuenta-back-btn" class="btn-secondary">Volver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="./js/main.js"></script>
+</body>
+</html>
