@@ -1,3 +1,5 @@
+//import { AlertManager } from "./AlertManager";
+
 // CLASE CUENTA - Representa una cuenta bancaria básica
 class Cuenta {
     constructor(numeroCuenta, saldo = 0) {
@@ -46,7 +48,7 @@ class Cuenta {
     }
 }
 
-// CLASE CUENTA DE AHORROS - Extiende la clase Cuenta
+// CLASE CUENTA DE AHORROS - hereda de la clase Cuenta
 class CuentaAhorros extends Cuenta {
     constructor(numeroCuenta, saldo = 0) {
         super(numeroCuenta, saldo);

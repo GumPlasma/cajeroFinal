@@ -194,11 +194,17 @@ function llenarSelectCuentas() {
                 option.textContent = `${cuenta.tipo.toUpperCase()} - ${cuenta.numeroCuenta} ($${cuenta.consultarSaldo().toLocaleString()})`;
                 select.appendChild(option);
             });
-        } else {
-            const option = document.createElement('option');
-            option.textContent = 'No tiene cuentas';
-            select.appendChild(option);
+         // Si solo hay una cuenta, seleccionarla automáticamente
+         if (cliente.cuentas.length === 1) {
+            select.value = cliente.cuentas[0].numeroCuenta;
+            // Disparar el evento change para actualizar la información
+            select.dispatchEvent(new Event('change'));
         }
+    } else {
+        const option = document.createElement('option');
+        option.textContent = 'No tiene cuentas';
+        select.appendChild(option);
+    }
     });
 }
 
@@ -400,12 +406,17 @@ function manejarTransferencia() {
         AlertManager.confirm(`¿Está seguro de que desea transferir $${monto.toLocaleString()} a la cuenta ${cuentaDestinoNumero}?`, 'Confirmar Transferencia')
             .then((result) => {
                 if (result.isConfirmed) {
+                    try {
                     cliente.realizarTransferencia(cuentaOrigen, cuentaDestino, monto);
                     AlertManager.success(`Transferencia exitosa de $${monto.toLocaleString()} a la cuenta ${cuentaDestinoNumero}`);
                     actualizarInformacionCuentas();
                     document.getElementById('transferir-container').style.display = 'none';
                     document.getElementById('transferencia-destino').value = '';
                     document.getElementById('transferencia-monto').value = '';
+                    } catch (error) {
+                        AlertManager.error(error.message);  
+                    }
+                    
                 }
             });
     } catch (error) {
